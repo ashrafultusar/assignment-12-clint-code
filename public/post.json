@@ -1,0 +1,42 @@
+[
+    {
+        "author_image": "https://i.ibb.co/zshTTgk/images.jpg",
+        "author_name": "John Doe",
+        "post_title": "How to learn Python?",
+        "post_description": "I've been trying to learn Python and would love some tips on where to start.",
+        "tag": "Python",
+        "post_time": "2024-06-08T10:15:30Z"
+    },
+    {
+        "author_image": "https://i.ibb.co/fQwdJ1P/360-F-531378887-v7w-GO67-Maz-Po-H63d-Mx-MEz12-BVy-ANS8-LR.jpg",
+        "author_name": "Jane Smith",
+        "post_title": "Best practices for JavaScript",
+        "post_description": "What are some best practices for writing clean and efficient JavaScript code?",
+        "tag": "JavaScript",
+        "post_time": "2024-06-07T09:20:45Z"
+    },
+    {
+        "author_image": "https://i.ibb.co/WgWFTjL/images-1.jpg",
+        "author_name": "Alice Johnson",
+        "post_title": "Understanding CSS Grid",
+        "post_description": "Can someone explain how CSS Grid works? I'm having trouble grasping the concept.",
+        "tag": "CSS",
+        "post_time": "2024-06-06T14:05:10Z"
+    },
+    {
+        "author_image": "https://i.ibb.co/Csg1Lqh/istockphoto-1090878494-612x612.jpg",
+        "author_name": "Bob Brown",
+        "post_title": "Database normalization",
+        "post_description": "What is database normalization and why is it important?",
+        "tag": "Database",
+        "post_time": "2024-06-05T12:30:00Z"
+    },
+    {
+        "author_image": "https://i.ibb.co/Lr74NF3/istockphoto-1431058012-170667a.webp",
+        "author_name": "Charlie Green",
+        "post_title": "Tips for learning HTML",
+        "post_description": "I'm new to web development and would appreciate any tips on learning HTML.",
+        "tag": "HTML",
+        "post_time": "2024-06-04T08:45:15Z"
+    }
+]

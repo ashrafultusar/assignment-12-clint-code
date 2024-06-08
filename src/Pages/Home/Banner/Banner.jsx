@@ -5,7 +5,7 @@ const Banner = () => {
         className="hero h-[460px]"
         style={{
           backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+            "url(https://i.ibb.co/3NrRj6M/images.png)",
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
@@ -17,7 +17,7 @@ const Banner = () => {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            
           </div>
         </div>
       </div>
