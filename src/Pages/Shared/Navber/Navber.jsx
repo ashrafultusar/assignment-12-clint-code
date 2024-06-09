@@ -114,8 +114,8 @@ const Navber = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow bg-base-100 rounded-box w-52"
             >
               <div className="py-4">
-                <li className="mb-2">{}User name</li>
-                <li>Dashboard</li>
+                <li className="mb-2 text-xl font-bold">{user?.displayName}</li>
+                <Link className="text-xl font-bold" to={'/dashboard'}>Dashboard</Link>
               </div>
               <button onClick={logOut} className="btn bg-[#b58753] text-white">
                 Logout

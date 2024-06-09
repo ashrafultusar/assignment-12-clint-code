@@ -3,6 +3,7 @@ import useAuth from "../Hook/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaGoogle } from "react-icons/fa";
+import { imageUploade } from "../Api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,26 +17,19 @@ const Register = () => {
     const password = form.password.value;
     const image = form.image.files[0];
 
-    const formdata = new FormData();
-    formdata.append("image", image);
+    
 
     try {
       //upload image
-      const { data } = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_IBB_API_KEY
-        }`,
-        formdata
-      );
-
-      console.log(data.data.display_url);
-
+      
+      const image_url = await imageUploade(image) 
+      console.log(image_url)
       // user signup
       const result = await createUser(email, password);
       console.log(result);
 
       // update profile
-      await updateUserProfile(name, data.data.display_url);
+      await updateUserProfile(name, image_url);
       navigate("/");
       toast.success("Register successful");
     } catch (err) {
