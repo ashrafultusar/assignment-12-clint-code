@@ -1,22 +1,22 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../../../Hook/useAuth";
 
 const Navber = () => {
-const {user,logOut}=useAuth()
-console.log(user)
-  const navMenu = (
-    <>
-      <li>
-        <NavLink>Home</NavLink>
-      </li>
-      <li>
-        <NavLink>Membership</NavLink>
-      </li>
-      <li>
-        <NavLink>Home</NavLink>
-      </li>
-    </>
-  );
+  const { user, logOut } = useAuth();
+  console.log(user);
+  // const navMenu = (
+  //   <>
+  //     <li>
+  //       <Link>Home</Link>
+  //     </li>
+  //     <li>
+  //       <Link>Membership</Link>
+  //     </li>
+  //     <li>
+  //       <Link>Home</Link>
+  //     </li>
+  //   </>
+  // );
 
   return (
     <div>
@@ -43,16 +43,34 @@ console.log(user)
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {navMenu}
+              <li>
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li>
+                <Link to={"/membership"}>Membership</Link>
+              </li>
             </ul>
           </div>
-         <Link to={'/'}> <a className="btn btn-ghost text-xl">ConvoHub</a></Link>
+          <div className="flex items-center">
+         
+          <Link to={"/"}>
+          
+          <a className="btn btn-ghost text-xl">ConvoHub</a>
+        </Link>
+         </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navMenu}</ul>
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link>Home</Link>
+            </li>
+            <li>
+              <Link to={"/membership"}>Membership</Link>
+            </li>
+          </ul>
         </div>
         <div className="navbar-end">
-          <Link to={'/login'}><button className="btn bg-[#b58753] text-white">Join US</button></Link>
+         
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -78,17 +96,17 @@ console.log(user)
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
+          
+
+          {
+            user?  <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={user?.photoURL}
-                />
+                <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
               </div>
             </div>
             <ul
@@ -99,9 +117,19 @@ console.log(user)
                 <li className="mb-2">{}User name</li>
                 <li>Dashboard</li>
               </div>
-              <button onClick={logOut} className="btn bg-[#b58753] text-white">Logout</button>
+              <button onClick={logOut} className="btn bg-[#b58753] text-white">
+                Logout
+              </button>
             </ul>
-          </div>
+          </div>:<Link to={"/login"}>
+            <button className="btn bg-[#b58753] text-white">Join US</button>
+          </Link>
+}
+
+          
+
+
+         
         </div>
       </div>
     </div>
