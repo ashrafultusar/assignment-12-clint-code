@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import {
-  GithubAuthProvider,
+ 
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
@@ -8,12 +8,13 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 import { toast } from "react-toastify";
 
 const auth = getAuth(app);
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 const Authprovider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -41,6 +42,14 @@ const Authprovider = ({ children }) => {
     return signOut(auth);
   };
 
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    })
+  }
+
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -51,7 +60,7 @@ const Authprovider = ({ children }) => {
     };
   }, []);
 
-  const authInfo = { user, loading, createUser, signIn, signInGoogle, logOut };
+  const authInfo = { user, loading, createUser, signIn, signInGoogle, logOut,updateUserProfile };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
