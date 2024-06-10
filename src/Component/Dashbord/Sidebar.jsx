@@ -12,12 +12,14 @@ const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
-  const [role,isLoading] = useRole();
-  console.log(role,isLoading);
+  const [role, isLoading] = useRole();
+  console.log(role, isLoading);
 
   const handleToggle = () => {
     setActive(!isActive);
   };
+
+
 
   return (
     <>
@@ -57,37 +59,59 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             {/*  Menu Items */}
-            <nav className="ml-2">
-              {/* Statistics */}
-              <ul>
-                {/* <MenuItem label='MyProfile' address='myProfile'></MenuItem> */}
 
-                <NavLink className="text-xl font-bold" to="myProfile">
-                  MyProfile
-                </NavLink>
-              </ul>
-              <ul>
-                <NavLink className="text-xl font-bold" to="addPost">
-                  AddPost
-                </NavLink>
-                {/* <MenuItem label='Add Post' address='addPost'></MenuItem> */}
-              </ul>
-              <ul>
-                <NavLink className="text-xl font-bold" to="myPost">
-                  MyPosts
-                </NavLink>
-                {/* <MenuItem label='My Posts' address='myPost'></MenuItem> */}
-              </ul>
+            <nav className="ml-2">
+              {role === "User" && (
+                <>
+                  <ul>
+                    <NavLink className="text-xl font-bold" to="myProfile">
+                      MyProfile
+                    </NavLink>
+                  </ul>
+                  <ul>
+                    <NavLink className="text-xl font-bold" to="addPost">
+                      AddPost
+                    </NavLink>
+                  </ul>
+                  <ul>
+                    <NavLink className="text-xl font-bold" to="myPost">
+                      MyPosts
+                    </NavLink>
+                  </ul>
+                </>
+              )}
+
+              {
+                role === 'Admin' && <>
+                <ul>
+                    <NavLink className="text-xl font-bold" to="myProfile">
+                    AdminProfile
+                    </NavLink>
+                  </ul>
+                  <ul>
+                    <NavLink className="text-xl font-bold" to="manageUser">
+                    ManageUsers
+                    </NavLink>
+                  </ul>
+                  <ul>
+                    <NavLink className="text-xl font-bold" >
+                    Activities
+                    </NavLink>
+                  </ul>
+                  <ul>
+                    <NavLink className="text-xl font-bold" to="myPost">
+                    MakeAnnouncement
+
+                    </NavLink>
+                  </ul>
+                </>
+              }
             </nav>
           </div>
         </div>
 
         <div>
           <hr />
-
-          {/* Profile Menu */}
-
-          <p>Profile</p>
 
           <button
             onClick={logOut}
@@ -104,6 +128,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-
-

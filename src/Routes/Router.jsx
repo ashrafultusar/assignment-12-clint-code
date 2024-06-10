@@ -11,6 +11,8 @@ import DashbordLayout from "../Layout/Dashbord/DashbordLayout";
 import MyProfile from "../Pages/Dashbord/User/MyProfile";
 import AddPost from "../Pages/Dashbord/User/AddPost";
 import MyPost from "../Pages/Dashbord/User/MyPost";
+import ManageUser from "../Pages/Dashbord/Admin/ManageUser";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +26,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/membership",
-        element: <Membership></Membership>,
+        element: (
+          <PrivateRoute>
+            <Membership></Membership>
+          </PrivateRoute>
+        ),
       },
       {
         path: "allPost",
@@ -32,7 +38,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/postDetails/:id",
-        element: <PostDetails></PostDetails>,
+        element: (
+          <PrivateRoute>
+            <PostDetails></PostDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -45,28 +55,30 @@ export const router = createBrowserRouter([
     element: <Register></Register>,
   },
 
-
   {
-    path: 'dashboard',
-    element:<DashbordLayout></DashbordLayout>,
+    path: "dashboard",
+    element: <DashbordLayout></DashbordLayout>,
     children: [
       {
-        path: 'dashboard',
-        element:<MyProfile></MyProfile>
+        path: "dashboard",
+        element: "welcome",
       },
       {
-        path: 'addpost',
-        element: <AddPost></AddPost>
+        path: "addpost",
+        element: <AddPost></AddPost>,
       },
       {
-        path: 'mypost',
-        element:<MyPost></MyPost>
+        path: "mypost",
+        element: <MyPost></MyPost>,
       },
       {
-        path:'/dashboard/myProfile',
-      element:<MyProfile></MyProfile>  
-      }
-    ]
-}
-
+        path: "myProfile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "manageUser",
+        element: <ManageUser></ManageUser>,
+      },
+    ],
+  },
 ]);

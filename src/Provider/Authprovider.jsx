@@ -61,11 +61,14 @@ const Authprovider = ({ children }) => {
   const saveUser = async user => {
     const currentUser = {
       email: user?.email,
+      name: user?.displayName,
       role: 'User',
-      status:'Verified',
+      status: 'Verified',
+      badges: 'bronze',
+      
     }
     const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, currentUser)
-    
+
     return data
 
   }
