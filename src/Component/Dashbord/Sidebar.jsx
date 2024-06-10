@@ -5,14 +5,16 @@ import { AiOutlineBars } from "react-icons/ai";
 
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
+import useRole from "../../Hook/useRole";
+import { MenuItem } from "@headlessui/react";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
+  const [role,isLoading] = useRole();
+  console.log(role,isLoading);
 
-
-  
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -55,16 +57,26 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             {/*  Menu Items */}
-            <nav className='ml-2'>
+            <nav className="ml-2">
               {/* Statistics */}
               <ul>
-                <NavLink className='text-xl font-bold' to="myProfile">MyProfile</NavLink>
+                {/* <MenuItem label='MyProfile' address='myProfile'></MenuItem> */}
+
+                <NavLink className="text-xl font-bold" to="myProfile">
+                  MyProfile
+                </NavLink>
               </ul>
               <ul>
-                <NavLink className='text-xl font-bold' to="addPost">AddPost</NavLink>
+                <NavLink className="text-xl font-bold" to="addPost">
+                  AddPost
+                </NavLink>
+                {/* <MenuItem label='Add Post' address='addPost'></MenuItem> */}
               </ul>
               <ul>
-                <NavLink className='text-xl font-bold' to="myPost">MyPosts</NavLink>
+                <NavLink className="text-xl font-bold" to="myPost">
+                  MyPosts
+                </NavLink>
+                {/* <MenuItem label='My Posts' address='myPost'></MenuItem> */}
               </ul>
             </nav>
           </div>
@@ -92,3 +104,6 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+

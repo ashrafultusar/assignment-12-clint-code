@@ -61,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: 'mypost',
         element:<MyPost></MyPost>
+      },
+      {
+        path:'/dashboard/myProfile',
+      element:<MyProfile></MyProfile>  
       }
     ]
 }
