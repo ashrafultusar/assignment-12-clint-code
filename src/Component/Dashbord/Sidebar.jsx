@@ -10,6 +10,9 @@ const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
+
+
+  
   const handleToggle = () => {
     setActive(!isActive);
   };

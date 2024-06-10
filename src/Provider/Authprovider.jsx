@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -49,10 +50,35 @@ const Authprovider = ({ children }) => {
     })
   }
 
+  // get token from server
+//   const getToken = async email => {
+//     const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email},{withCredentials:true})
+// return data
+//   }
+
+
+  // save user
+  const saveUser = async user => {
+    const currentUser = {
+      email: user?.email,
+      role: 'User',
+      status:'Verified',
+    }
+    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, currentUser)
+    
+    return data
+
+  }
+
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser) {
+        // getToken(currentUser.email)
+        saveUser(currentUser)
+      }
       setLoading(false);
     });
     return () => {
