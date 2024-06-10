@@ -1,17 +1,15 @@
 
-
 import { useState } from 'react'
+import DeletModal from '../Modal/DeletModal'
 
- 
-
-const TableRow = ({ p, refetch }) => {
+const TableRow = ({ p, refetch,handleDelete }) => {
   // for delete modal
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => {
     setIsOpen(false)
   }
 
-  // for update modal
+    
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -20,7 +18,7 @@ const TableRow = ({ p, refetch }) => {
             <div className='block relative'>
               <img
                 alt='profile'
-                src={p.image}
+                src={p.author_image}
                 className='mx-auto object-cover rounded h-10 w-15 '
               />
             </div>
@@ -52,12 +50,9 @@ const TableRow = ({ p, refetch }) => {
           <span className='relative'>Delete</span>
         </button>
         {/* Delete modal */}
-        {/* <DeleteModal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          handleDelete={handleDelete}
-          id={''}
-        /> */}
+        
+               <DeletModal closeModal={closeModal} isOpen={isOpen} handleDelete={handleDelete} id={p._id}></DeletModal>
+
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <span className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>

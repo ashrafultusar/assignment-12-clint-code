@@ -55,7 +55,7 @@ const navigate=useNavigate()
         post_title,
         post_description,
         author_name,email,
-        image: image_url,
+        author_image: image_url,
         post_time,user_image
       };
       console.log(postData);

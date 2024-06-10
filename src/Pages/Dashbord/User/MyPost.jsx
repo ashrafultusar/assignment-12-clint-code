@@ -22,29 +22,29 @@ const MyPost = () => {
     
     console.log(post)
     
-    
+
   //   delete
-//   const { mutateAsync } = useMutation({
-//     mutationFn: async id => {
-//       const { data } = await axiosSecure.delete(`/room/${id}`)
-//       return data
-//     },
-//     onSuccess: data => {
-//       console.log(data)
-//       refetch()
-//       toast.success('Successfully deleted.')
-//     },
-//   })
+  const { mutateAsync } = useMutation({
+    mutationFn: async id => {
+      const { data } = await axiosSecure.delete(`/post/${id}`)
+      return data
+    },
+    onSuccess: data => {
+      console.log(data)
+      refetch()
+      toast.success('Successfully deleted.')
+    },
+  })
 
   //  Handle Delete
-//   const handleDelete = async id => {
-//     console.log(id)
-//     try {
-//       await mutateAsync(id)
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
+  const handleDelete = async id => {
+    console.log(id)
+    try {
+      await mutateAsync(id)
+    } catch (err) {
+      console.log(err)
+    }
+  }
     //   if (isLoading) return <LoadingSpinner></LoadingSpinner>
     
   return (
@@ -109,16 +109,9 @@ const MyPost = () => {
                 <tbody>
                   {/* Room row data */}
 
-                  {/* {rooms.map(room => (
-                    <RoomDataRow
-                      key={room._id}
-                      room={room}
-                      handleDelete={handleDelete}
-                    />
-                  ))} */}
 
                                   {
-                                   post.map(p=><TableRow key={p._id} p={p} refetch={refetch}></TableRow>)   
+                                   post.map(p=><TableRow key={p._id} p={p} refetch={refetch}handleDelete={handleDelete}></TableRow>)   
                             }      
 
                 </tbody>

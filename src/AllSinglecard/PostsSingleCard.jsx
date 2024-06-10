@@ -52,7 +52,7 @@ const PostsSingleCard = ({ post }) => {
                   src={author_image}
                   alt=""
                 />
-                post_description
+                {author_name}
               </div>
             </a>
           </div>
