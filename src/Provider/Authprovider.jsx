@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import {
- 
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,6 +12,7 @@ import {
 import { app } from "../Firebase/firebase.config";
 import { toast } from "react-toastify";
 import axios from "axios";
+import useAxiosSecure, { axiosSecure } from "../Hook/useAxiosSecure";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -20,7 +20,7 @@ export const AuthContext = createContext(null);
 const Authprovider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  // const axiosSecure = useAxiosSecure();
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -47,49 +47,83 @@ const Authprovider = ({ children }) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
-    })
-  }
+    });
+  };
 
   // get token from server
-//   const getToken = async email => {
-//     const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email},{withCredentials:true})
-// return data
-//   }
-
+  const getToken = async email => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/jwt`,
+      { email },
+      { withCredentials: true }
+    )
+    return data
+  }
 
   // save user
-  const saveUser = async user => {
+  const saveUser = async (user) => {
     const currentUser = {
       email: user?.email,
       name: user?.displayName,
-      role: 'User',
-      status: 'Verified',
-      badges: 'bronze',
-      
-    }
-    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, currentUser)
+      role: "User",
+      status: "Verified",
+      badges: "bronze",
+    };
+    const { data } = await axios.put(
+      `${import.meta.env.VITE_API_URL}/user`,
+      currentUser
+    );
 
-    return data
+    return data;
+  };
 
-  }
+  // useEffect(() => {
+  //   const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
 
+  //     if (currentUser) {
+  //       const userInfo = { email: currentUser.email };
+  //       axiosSecure.post("/jwt", userInfo).then((res) => {
+  //         if (res.data.token) {
+  //           localStorage.setItem("access-token", res.data.token);
+  //         }
+  //       });
+  //     } else {
+  //       // TODO
+  //       localStorage.removeItem("access-token");
+  //     }
 
+  //     setLoading(false);
+  //   });
+  //   return () => {
+  //     return unSubscribe();
+  //   };
+  // }, []);
+  
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser)
       if (currentUser) {
-        // getToken(currentUser.email)
+        getToken(currentUser.email)
         saveUser(currentUser)
       }
-      setLoading(false);
-    });
+      setLoading(false)
+    })
     return () => {
-      return unSubscribe();
-    };
-  }, []);
+      return unsubscribe()
+    }
+  }, [])
 
-  const authInfo = { user, loading, createUser, signIn, signInGoogle, logOut,updateUserProfile };
+
+  const authInfo = {
+    user,
+    loading,
+    createUser,
+    signIn,
+    signInGoogle,
+    logOut,
+    updateUserProfile,saveUser
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

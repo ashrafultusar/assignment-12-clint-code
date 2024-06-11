@@ -1,14 +1,26 @@
 // import { TbFidgetSpinner } from "react-icons/tb";
 // import useAuth from "../Hook/useAuth";
 
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "../Hook/useAuth";
+import useAxiosSecure from "../Hook/useAxiosSecure";
+import { Link } from "react-router-dom";
 
-const AddPostForm = ({handelSubmit}) => {
+const AddPostForm = ({ handelSubmit }) => {
+  const { user } = useAuth();
 
-    const {user}=useAuth()
-    
-    
-    
+  const axiosSecure = useAxiosSecure();
+  //   Fetch post Data
+  const { data: post = [] } = useQuery({
+    queryKey: ["mypost", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/mypost/${user.email}`);
+
+      return data;
+    },
+  });
+
+  console.log(post);
 
   return (
     <div>
@@ -50,7 +62,7 @@ const AddPostForm = ({handelSubmit}) => {
             <div className="space-y-6">
               <div className="space-y-1 text-sm">
                 <label htmlFor="title" className="block text-gray-600">
-                 Post Title
+                  Post Title
                 </label>
                 <input
                   className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
@@ -61,7 +73,7 @@ const AddPostForm = ({handelSubmit}) => {
                   required
                 />
               </div>
-{/* image */}
+              {/* image */}
               <div className=" p-4 bg-white w-full  m-auto rounded-lg flex justify-between items-center">
                 <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
                   <div className="flex flex-col w-max mx-auto text-center">
@@ -82,8 +94,8 @@ const AddPostForm = ({handelSubmit}) => {
                   </div>
                 </div>
                 <div className="h-16 w-16 object-cover overflow-hidden flex items-center"></div>
-                          </div>
-                          {/*  author name */}
+              </div>
+              {/*  author name */}
               <div className="flex justify-between gap-2">
                 <div className="space-y-1 text-sm">
                   <label htmlFor="price" className="block text-gray-600">
@@ -95,13 +107,12 @@ const AddPostForm = ({handelSubmit}) => {
                     id="text"
                     type="text"
                     placeholder={user?.displayName}
-                    
                   />
                 </div>
-{/* author emali */}
+                {/* author emali */}
                 <div className="space-y-1 text-sm">
                   <label htmlFor="guest" className="block text-gray-600">
-                   Author Email
+                    Author Email
                   </label>
                   <input
                     className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
@@ -109,7 +120,6 @@ const AddPostForm = ({handelSubmit}) => {
                     id="guest"
                     type="email"
                     placeholder={user?.email}
-                    
                   />
                 </div>
               </div>
@@ -158,10 +168,23 @@ const AddPostForm = ({handelSubmit}) => {
             </div>
           </div>
 
-          <button
+          {post.length < 5 ? <button
             type="submit"
             className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
-          >Submit To continue</button>
+          >
+            Submit To continue
+          </button>
+            :
+        <Link to={'/membership'}><button
+        type="submit"
+        className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+      >
+       Become a Member
+      </button></Link>
+          
+        }
+          
+         
         </form>
       </div>
     </div>

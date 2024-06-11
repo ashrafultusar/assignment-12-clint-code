@@ -102,6 +102,7 @@ const Login = () => {
                   Register
                 </Link>
               </p>
+             <Link to={'/'}>GO Home</Link>
             </form>
           </div>
         </div>

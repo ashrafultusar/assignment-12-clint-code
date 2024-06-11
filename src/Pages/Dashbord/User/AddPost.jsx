@@ -75,3 +75,9 @@ const navigate=useNavigate()
 };
 
 export default AddPost;
+
+
+
+
+
+
