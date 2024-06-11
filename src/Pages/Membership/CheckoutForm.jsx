@@ -4,7 +4,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useAuth from "../../Hook/useAuth";
 
-const CheckoutForm = () => {
+const CheckoutForm = () => { 
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -16,7 +16,7 @@ const CheckoutForm = () => {
     if (price) {
       getClintSecreat({ price: price });
     }
-  }, []);
+  }, [price]);
 
   // get clintsecrete id
   const getClintSecreat = async (price) => {

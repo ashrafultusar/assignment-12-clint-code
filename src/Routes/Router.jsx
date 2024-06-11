@@ -13,6 +13,7 @@ import AddPost from "../Pages/Dashbord/User/AddPost";
 import MyPost from "../Pages/Dashbord/User/MyPost";
 import ManageUser from "../Pages/Dashbord/Admin/ManageUser";
 import PrivateRoute from "./PrivateRoute";
+import Announcement from "../Pages/Dashbord/Admin/Announcement";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
         path: "manageUser",
         element: <ManageUser></ManageUser>,
       },
+      {
+        path: 'announcement',
+        element:<Announcement></Announcement>
+      }
     ],
   },
 ]);

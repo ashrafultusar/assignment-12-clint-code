@@ -99,7 +99,7 @@ const Sidebar = () => {
                     </NavLink>
                   </ul>
                   <ul>
-                    <NavLink className="text-xl font-bold" to="myPost">
+                    <NavLink className="text-xl font-bold" to="announcement">
                     MakeAnnouncement
 
                     </NavLink>

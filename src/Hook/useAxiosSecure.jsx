@@ -5,13 +5,24 @@ import { useNavigate } from 'react-router-dom'
 
 export const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
+  // withCredentials: true,
+
+
 })
+
 const useAxiosSecure = () => {
   const { logOut } = useAuth()
   const navigate = useNavigate()
   useEffect(() => {
     axiosSecure.interceptors.response.use(
+
+      config => {
+        if (!config.headers) {
+          config.headers={}
+        }
+        config.headers['Authorization'] = `Bearer ${localStorage.getItem('access-token')}`;
+            return config;
+        },
       res => {
         return res
       },
@@ -30,3 +41,5 @@ const useAxiosSecure = () => {
 }
 
 export default useAxiosSecure
+
+
