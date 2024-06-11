@@ -6,7 +6,12 @@ const AnnouncementForm = ({ handelSubmit }) => {
   return (
     <div>
       <div>
-        <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
+        <div className="w-full min-h-[calc(100vh-40px)] flex  justify-center items-center text-gray-800 rounded-xl bg-gray-50">
+
+        {/* <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
+                <img className="w-full h-full max-w-md" src="https://merakiui.com/images/components/Email-campaign-bro.svg" alt="" />
+          </div> */}
+          
           <form onSubmit={handelSubmit}>
             <div className="">
               <div className="space-y-6"></div>
@@ -84,6 +89,8 @@ const AnnouncementForm = ({ handelSubmit }) => {
           </button>
             </div>
           </form>
+
+          
         </div>
       </div>
     </div>

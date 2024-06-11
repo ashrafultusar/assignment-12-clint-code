@@ -5,6 +5,7 @@ import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 import useAxiosCommon from "../../../Hook/useAxiosCommon";
 
 const AllPost = () => {
+  
   const axiosCommon = useAxiosCommon();
 
   const { data: posts = [] ,isLoading} = useQuery({
@@ -18,7 +19,9 @@ const AllPost = () => {
 
   console.log(posts);
 
-  if(isLoading) return <LoadingSpinner></LoadingSpinner>
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>
+  
+
   // const [posts, setPosts] = useState([]);
   // useEffect(() => {
   //   fetch("post.json")

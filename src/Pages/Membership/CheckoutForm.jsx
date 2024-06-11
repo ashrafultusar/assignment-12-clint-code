@@ -4,7 +4,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useAuth from "../../Hook/useAuth";
 
-const CheckoutForm = () => { 
+const CheckoutForm = () => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -58,7 +58,8 @@ const CheckoutForm = () => {
     }
 
     // confrim payment
-    const {error:confirmError,paymentIntent}=await stripe.confirmCardPayment(clientSecret, {
+    const { error: confirmError, paymentIntent } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
@@ -66,62 +67,67 @@ const CheckoutForm = () => {
             name: user?.displayName,
           },
         },
-    });
-      
-      if (confirmError) {
-          console.log(confirmError)
-return
-      }
+      });
 
-      if (paymentIntent.status === 'succeeded') {
-          //   
-          console.log(paymentInfo)
-          const paymentInfo = {
-              price,
-              transactionId: paymentIntent.id,
-              date: new Date(),
-          }
-          
-          console.log(paymentInfo);
-      }
+    if (confirmError) {
+      console.log(confirmError);
+      return;
+    }
+
+    if (paymentIntent.status === "succeeded") {
+      //
+      console.log(paymentInfo);
+      const paymentInfo = {
+        price,
+        transactionId: paymentIntent.id,
+        date: new Date(),
+      };
+
+      console.log(paymentInfo);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
-              },
-            },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
+    <div className="mx-64 ">
+     
+     <form onSubmit={handleSubmit}>
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
+                  },
+                },
+              }}
+            />
 
-      <div className="flex justify-between">
-        <button
-          className="text-red-500 font-bold"
-          type="submit"
-          disabled={!stripe}
-        >
-          Pay 150$
-        </button>
-        <button
-          className="text-red-500 font-bold"
-          type="submit"
-          disabled={!stripe}
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+            <div className="flex justify-between">
+              <button
+                className="text-red-500 font-bold"
+                type="submit"
+                disabled={!stripe}
+              >
+                Pay 150$
+              </button>
+              <button
+                className="text-red-500 font-bold"
+                type="submit"
+                disabled={!stripe}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+      
+    
+    </div>
   );
 };
 
