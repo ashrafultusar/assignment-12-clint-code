@@ -1,4 +1,18 @@
+import { useState } from "react";
+
 const Banner = () => {
+
+  const [search,setSearch]=useState('')
+
+
+  const handelsearch = e => {
+    e.preventDefault()
+    const searchText = e.target.search.value
+    console.log(searchText);
+setSearch(searchText)
+  }
+
+
   return (
     <div>
       <div
@@ -13,11 +27,16 @@ const Banner = () => {
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
             <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Search Your Favorite Author Post
             </p>
             
+            <div>
+              <form onSubmit={handelsearch}>
+                <input className="text-black p-3 rounded-l-lg" type="text" name="search" id="" />
+                <input className="p-3 rounded-r-lg bg-[#B58753]" type="submit" value='Search' />
+              </form>
+            </div>
+
           </div>
         </div>
       </div>
