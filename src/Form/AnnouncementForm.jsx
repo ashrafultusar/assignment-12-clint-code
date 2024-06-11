@@ -13,7 +13,7 @@ const AnnouncementForm = ({ handelSubmit }) => {
               <div className="space-y-6">
                 <div className="space-y-1 text-sm">
                   <label htmlFor="title" className="block text-gray-600">
-                    Post Title
+                    Announcement Title
                   </label>
                   <input
                     className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
@@ -76,6 +76,12 @@ const AnnouncementForm = ({ handelSubmit }) => {
                   ></textarea>
                 </div>
               </div>
+              <button
+            type="submit"
+            className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+          >
+            Submit To continue
+          </button>
             </div>
           </form>
         </div>
