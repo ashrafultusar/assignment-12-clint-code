@@ -35,7 +35,7 @@ const UserDataRow = ({ user, refetch }) => {
       return setIsOpen(false)
     }
     
-    console.log("updet", selected);
+    console.log("update", selected);
     
     const userRole = {
       role: selected,

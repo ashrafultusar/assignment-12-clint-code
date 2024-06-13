@@ -38,7 +38,8 @@ const navigate=useNavigate()
     const post_title = form.title.value;
     const post_description = form.description.value;
     const author_image = form.image.files[0];
-    
+    const upVote = 0;
+    const DownVote = 0;
     const email = user?.email;
     const author_name = user.displayName;
     const  user_image= user.photoURL
@@ -53,7 +54,7 @@ const navigate=useNavigate()
 
       const postData = {
         tag,
-        post_title,
+        post_title,upVote,DownVote,
         post_description,
         author_name,email,
         author_image: image_url,
