@@ -141,7 +141,7 @@ const CheckoutForm = () => {
             }}
           />
 
-          <div className="flex justify-between">
+          <div className="flex justify-between ">
             <button
               className="btn text-red-500 font-bold"
               type="submit"

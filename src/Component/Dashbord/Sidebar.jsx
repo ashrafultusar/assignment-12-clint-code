@@ -6,7 +6,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import useRole from "../../Hook/useRole";
-import { MenuItem } from "@headlessui/react";
+
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -84,7 +84,7 @@ const Sidebar = () => {
               {
                 role === 'Admin' && <>
                 <ul>
-                    <NavLink className="text-xl font-bold" to="myProfile">
+                    <NavLink className="text-xl font-bold" to="adminProfile">
                     AdminProfile
                     </NavLink>
                   </ul>

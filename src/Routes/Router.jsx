@@ -14,6 +14,7 @@ import MyPost from "../Pages/Dashbord/User/MyPost";
 import ManageUser from "../Pages/Dashbord/Admin/ManageUser";
 import PrivateRoute from "./PrivateRoute";
 import Announcement from "../Pages/Dashbord/Admin/Announcement";
+import AdminProfile from "../Pages/Dashbord/Admin/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -87,7 +88,12 @@ export const router = createBrowserRouter([
       {
         path: 'announcement',
         element:<Announcement></Announcement>
+      },
+      {
+        path: 'adminProfile',
+        element:<AdminProfile></AdminProfile>
       }
+
     ],
   },
 ]);
