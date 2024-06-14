@@ -20,7 +20,7 @@ const MyProfile = () => {
       return data;
     },
   });
-  console.log(users);
+  console.log(users.badges);
 
   // user recent post data
   const axiosSecure = useAxiosSecure();
@@ -62,7 +62,10 @@ const MyProfile = () => {
             <p className="p-2 uppercase px-4 text-xs text-white bg-black rounded-full">
               {role}
             </p>
-            <h1>{user?.badges === "bronze" ? <p>Gold</p> : <p>Bronze</p>}</h1>
+            <p className="p-2 uppercase px-4 text-xs text-white bg-black rounded-full">
+              {users.badges}
+            </p>
+           
 
             <p className="mt-2 text-xl font-medium text-gray-800 "></p>
             <div className="w-full p-2 mt-4 rounded-lg">
