@@ -7,7 +7,9 @@ import UserDataRow from "../../../Component/UserDataRow/UserDataRow";
 
 const ManageUser = () => {
 
-    const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure()
+  
+  
     //   Fetch users Data
     const {
       data: users = [],
@@ -22,6 +24,9 @@ const ManageUser = () => {
     })
   
   console.log(users)
+
+
+ 
   
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 

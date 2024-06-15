@@ -267,6 +267,7 @@ const Navber = () => {
             </ul>
           </div>
           <div className="flex items-center">
+            <img className="w-6" src="https://i.ibb.co/gMS9tRw/6046ed03ade41de8c2eac342c688a348.jpg" alt="" />
             <Link to={"/"}>
               <a className="btn btn-ghost text-xl">ConvoHub</a>
             </Link>
@@ -326,13 +327,16 @@ const Navber = () => {
               >
                 <div className="py-4">
                   <li className="mb-2 text-xl font-bold">{user?.displayName}</li>
-                  <button onClick={() => setIsModalOpen(true)} className="btn">
+                  <button onClick={() => setIsModalOpen(true)} className="bg-green-500 mb-2 px-8 py-2 rounded-lg">
                     Request to Admin
-                  </button>
+                  </button >
+
                   <HostModal isModalOpen={isModalOpen} closeModal={closeModal} modalHandeler={modalHandeler} />
-                  <Link className="text-xl font-bold" to={'/dashboard'}>
+
+
+                  <div className="mt-2"> <Link className="text-xl font-bold bg-green-500 px-8  py-2 rounded-lg" to={'/dashboard'}>
                     Dashboard
-                  </Link>
+                  </Link></div>
                 </div>
                 <button onClick={logOut} className="btn bg-[#b58753] text-white">
                   Logout

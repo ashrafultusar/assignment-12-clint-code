@@ -12,24 +12,23 @@ const AddPost = () => {
   <Helmet>
     <title>Dashboard | AddPost</title>
   </Helmet>;
-const axiosSecure=useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const { user } = useAuth();
-const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async postData => {
-      const { data } = await axiosSecure.post('/post', postData)
-      return data
+    mutationFn: async (postData) => {
+      const { data } = await axiosSecure.post("/post", postData);
+      return data;
     },
 
     onSuccess: () => {
-      console.log("Data save successfully")
-      toast.success('Post added successfully')
-      navigate('/dashboard/mypost')
-    }
-  })
-
+      console.log("Data save successfully");
+      toast.success("Post added successfully");
+      navigate("/dashboard/mypost");
+    },
+  });
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +41,7 @@ const navigate=useNavigate()
     const DownVote = 0;
     const email = user?.email;
     const author_name = user.displayName;
-    const  user_image= user.photoURL
-    
+    const user_image = user.photoURL;
 
     try {
       //
@@ -54,18 +52,22 @@ const navigate=useNavigate()
 
       const postData = {
         tag,
-        post_title,upVote,DownVote,
+        post_title,
+        upVote,
+        DownVote,
         post_description,
-        author_name,email,
+        author_name,
+        email,
         author_image: image_url,
-        post_time,user_image
+        post_time,
+        user_image,
       };
       console.log(postData);
-      await mutateAsync(postData)
+      await mutateAsync(postData);
     } catch (err) {
       //
       console.log(err.message);
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
 
@@ -77,9 +79,3 @@ const navigate=useNavigate()
 };
 
 export default AddPost;
-
-
-
-
-
-

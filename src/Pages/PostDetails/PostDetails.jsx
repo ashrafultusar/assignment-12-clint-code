@@ -1,8 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../Hook/useAxiosSecure";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDislike } from "react-icons/ai";
+import { FaShare } from "react-icons/fa";
 import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../Hook/useAxiosCommon";
+
+
+import {
+  FacebookShareButton
+} from "react-share";
+
+
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -29,6 +38,18 @@ const PostDetails = () => {
     tag,
   } = post;
 
+  const date = new Date(post_time);
+
+  // Extracting hours, minutes, and seconds
+  const hours = date.getUTCHours().toString().padStart(2, "0");
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+
+  // Formatting time as HH:MM:SS
+  const timeString = `${hours}:${minutes}:${seconds}`;
+
+
+  const shareUrl="https://www.pakkamarwadi.tk/"
   return (
     <div className="my-14">
       <div className="max-w-2xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -43,10 +64,11 @@ const PostDetails = () => {
               {tag}
             </a>
             <h1 className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 ">
-              {post_title}
+              <span className="text-xl font-bold">Title: </span> {post_title}
             </h1>
 
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-xl font-bold">Description: </span>{" "}
               {post_description}
             </p>
           </div>
@@ -55,14 +77,52 @@ const PostDetails = () => {
             <div className="flex items-center">
               <div className="flex items-center">
                 <img className="object-cover h-10 rounded-full" src="" alt="" />
-                              <h1 className="mx-2 font-semibold text-gray-700 dark:text-gray-200">{ author_name}</h1>
+                <h1 className="mx-2 font-semibold text-gray-700 dark:text-gray-200">
+                  {author_name}
+                </h1>
               </div>
               <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
-               {post_time}
+                <span className="text-[16px] font-bold">Post Time: </span>{" "}
+                {timeString}
               </span>
             </div>
           </div>
+          <div className="divider"></div>
+          <div
+            className="flex
+           gap-10 mt-2"
+          >
+            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-8 py-2.5">
+              <AiOutlineLike className="text-white text-xl" />
+            </button>
+            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-8 py-2.5">
+              <AiOutlineDislike className="text-white text-xl" />
+            </button>
+
+            {/* share button */}
+
+           
+            <FacebookShareButton url={shareUrl} quote={"Please write the title"}>
+            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-4 py-2.5 flex items-center gap-2 text-white">
+              <FaShare className="text-white text-xl" />
+              Share
+            </button>
+</FacebookShareButton>
+
+          </div>
         </div>
+      </div>
+      <div className="max-w-2xl mx-auto mt-2 flex items-center">
+      <div className="avatar">
+  <div className="w-10 rounded-full ">
+    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+  </div>
+</div>
+        <div><input
+          type="text" name="text"
+          placeholder="Add a comment..."
+          className="input input-bordered w-full max-w-xs"
+        /></div>
       </div>
     </div>
   );

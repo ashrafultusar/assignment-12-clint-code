@@ -1,6 +1,6 @@
 import { useState } from "react";
 import UpdateUserModal from "../Modal/UpdateUserModal";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 
@@ -27,6 +27,19 @@ const UserDataRow = ({ user, refetch }) => {
           setIsOpen(false)
       }
   });
+
+
+ //user info
+ const { data: users = {} } = useQuery({
+  queryKey: ["users", user?.email],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const { data } = await axiosSecure(`/user/${user?.email}`);
+    return data;
+  },
+});
+  console.log(users.badges);
+  
 
   const modalHandler = async (selected) => {
 
@@ -84,7 +97,7 @@ const UserDataRow = ({ user, refetch }) => {
         </td>
         <td>
           {
-            user.badges==="Gold"? <p>Membership</p>: <p>Generel User</p>
+            user?.badges==="Gold"? <p>Membership</p>: <p>Generel User</p>
           }
         </td>
 

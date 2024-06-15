@@ -62,8 +62,8 @@ const MyProfile = () => {
             <p className="p-2 uppercase px-4 text-xs text-white bg-black rounded-full">
               {role}
             </p>
-            <p className="p-2 uppercase px-4 text-xs text-white bg-black rounded-full">
-              {users.badges}
+            <p className="p-2 uppercase px-4 text-xs   bg-[#ff7473] rounded-full text-black mt-2"><span className="font-bold">Membership: </span>
+             <span > {users.badges==="Gold"? "Gold":"Bronze"}</span>
             </p>
            
 

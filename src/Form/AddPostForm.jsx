@@ -168,23 +168,23 @@ const AddPostForm = ({ handelSubmit }) => {
             </div>
           </div>
 
-          {post.length < 5 ? <button
-            type="submit"
-            className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
-          >
-            Submit To continue
-          </button>
-            :
-        <Link to={'/membership'}><button
-        type="submit"
-        className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
-      >
-       Become a Member
-      </button></Link>
-          
-        }
-          
-         
+          {post.length < 5 ? (
+            <button
+              type="submit"
+              className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+            >
+              Submit To continue
+            </button>
+          ) : (
+            <Link to={"/membership"}>
+              <button
+                type="submit"
+                className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+              >
+                Become a Member
+              </button>
+            </Link>
+          )}
         </form>
       </div>
     </div>

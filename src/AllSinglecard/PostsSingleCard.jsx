@@ -10,13 +10,26 @@ const PostsSingleCard = ({ post }) => {
     post_time,_id
   } = post;
 
+
+  const date = new Date(post_time);
+  
+  // Extracting hours, minutes, and seconds
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  
+  // Formatting time as HH:MM:SS
+  const timeString = `${hours}:${minutes}:${seconds}`;
+
+  
+
   return (
     <div>
       <Link to={`/postDetails/${_id}`}>
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-gray-600 dark:text-gray-400">
-            Post Time: {post_time}
+            Post Time: {timeString}
           </span>
           <a
             className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
