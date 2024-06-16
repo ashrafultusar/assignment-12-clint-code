@@ -28,19 +28,7 @@ const AddPostForm = ({ handelSubmit }) => {
         <form onSubmit={handelSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div className="space-y-6">
-              {/* <div className="space-y-1 text-sm">
-                <label htmlFor="location" className="block text-gray-600">
-                  Location
-                </label>
-                <input
-                  className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                  name="location"
-                  id="location"
-                  type="text"
-                  placeholder="Location"
-                  required
-                />
-              </div> */}
+         
 
               <div className="space-y-1 text-sm">
                 <label htmlFor="category" className="block text-gray-600">
@@ -124,35 +112,6 @@ const AddPostForm = ({ handelSubmit }) => {
                 </div>
               </div>
 
-              {/* <div className="flex justify-between gap-2">
-                <div className="space-y-1 text-sm">
-                  <label htmlFor="bedrooms" className="block text-gray-600">
-                    author Email
-                  </label>
-                  <input
-                    className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                    name="email"
-                    id="bedrooms"
-                    type="text"
-                    placeholder="Bedrooms"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-1 text-sm">
-                  <label htmlFor="bathrooms" className="block text-gray-600">
-                    Bathrooms
-                  </label>
-                  <input
-                    className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                    name="bathrooms"
-                    id="bathrooms"
-                    type="number"
-                    placeholder="Bathrooms"
-                    required
-                  />
-                </div>
-              </div> */}
 
               <div className="space-y-1 text-sm">
                 <label htmlFor="description" className="block text-gray-600">

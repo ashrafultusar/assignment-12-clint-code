@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
@@ -6,17 +6,54 @@ import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../Hook/useAxiosCommon";
 
-
-import {
-  FacebookShareButton
-} from "react-share";
-
-
+import { FacebookShareButton } from "react-share";
+import useAuth from "../../Hook/useAuth";
+import { toast } from "react-toastify";
+import { axiosSecure } from "../../Hook/useAxiosSecure";
+import { useState } from "react";
 
 const PostDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
+  const { user } = useAuth();
+  const [comments, setComments] = useState([]);
+  const { mutateAsync } = useMutation({
+    mutationFn: async (postData) => {
+      const { data } = await axiosSecure.post("/comment", postData);
+      return data;
+    },
 
+    onSuccess: (data) => {
+      console.log("Data save successfully");
+      toast.success("comment added successfully");
+      setComments(data)
+    },
+  });
+
+  // comment section
+  const handelComment = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const comment = form.comment.value;
+    const postId = post._id;
+    const postedPhoto = post.author_image;
+    const postEmail = user?.email;
+
+    // console.log(postInfo);
+    try {
+      const postData = { comment, postId, postedPhoto, postEmail };
+      console.log(postData);
+      await mutateAsync(postData);
+      form.reset();
+    } catch (err) {
+      console.log(err.message);
+      toast.error(err.message);
+    }
+  };
+
+  console.log(comments);
+ 
+  // post data load
   const { data: post = {}, isLoading } = useQuery({
     queryKey: ["/post", id],
     queryFn: async () => {
@@ -27,7 +64,6 @@ const PostDetails = () => {
   });
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
-  console.log(post);
 
   const {
     author_image,
@@ -36,8 +72,9 @@ const PostDetails = () => {
     post_time,
     post_title,
     tag,
+    _id
   } = post;
-
+  console.log(_id);
   const date = new Date(post_time);
 
   // Extracting hours, minutes, and seconds
@@ -48,8 +85,8 @@ const PostDetails = () => {
   // Formatting time as HH:MM:SS
   const timeString = `${hours}:${minutes}:${seconds}`;
 
+  const shareUrl = "https://www.pakkamarwadi.tk/";
 
-  const shareUrl="https://www.pakkamarwadi.tk/"
   return (
     <div className="my-14">
       <div className="max-w-2xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -101,28 +138,49 @@ const PostDetails = () => {
 
             {/* share button */}
 
-           
-            <FacebookShareButton url={shareUrl} quote={"Please write the title"}>
-            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-4 py-2.5 flex items-center gap-2 text-white">
-              <FaShare className="text-white text-xl" />
-              Share
-            </button>
-</FacebookShareButton>
-
+            <FacebookShareButton
+              url={shareUrl}
+              quote={"Please write the title"}
+            >
+              <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-4 py-2.5 flex items-center gap-2 text-white">
+                <FaShare className="text-white text-xl" />
+                Share
+              </button>
+            </FacebookShareButton>
           </div>
         </div>
       </div>
       <div className="max-w-2xl mx-auto mt-2 flex items-center">
+        <div className="avatar">
+          <div className="w-10 rounded-full ">
+            <img src={author_image} />
+          </div>
+        </div>
+        <form onSubmit={handelComment} className="flex">
+          <input
+            type="text"
+            name="comment"
+            placeholder="Add a comment..."
+            className="input input-bordered w-full max-w-xs"
+          />
+          <button
+            type="submit"
+            className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-4 py-2.5 flex items-center gap-2 text-white"
+          >
+            Comment
+          </button>
+        </form>
+      </div>
+
+      {/* show all comment  */}
+      <div>
       <div className="avatar">
-  <div className="w-10 rounded-full ">
-    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-  </div>
-</div>
-        <div><input
-          type="text" name="text"
-          placeholder="Add a comment..."
-          className="input input-bordered w-full max-w-xs"
-        /></div>
+          <div className="w-10 rounded-full ">
+            <img src={comments?.postedPhoto} />
+          </div>
+          <h1 className="bg-gray-500">{comments?.comment}
+</h1>
+        </div>
       </div>
     </div>
   );

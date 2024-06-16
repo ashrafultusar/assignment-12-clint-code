@@ -65,7 +65,6 @@ const AddPost = () => {
       console.log(postData);
       await mutateAsync(postData);
     } catch (err) {
-      //
       console.log(err.message);
       toast.error(err.message);
     }
