@@ -22,6 +22,17 @@ const AddPostForm = ({ handelSubmit }) => {
 
   console.log(post);
 
+
+  // load all tag from db
+  const { data: tags = [] } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/tags`);
+      return data;
+    },
+  });
+console.log(tags);
+
   return (
     <div>
       <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
@@ -39,11 +50,10 @@ const AddPostForm = ({ handelSubmit }) => {
                   className="w-full px-4 py-3 border-rose-300 focus:outline-rose-500 rounded-md"
                   name="tag"
                 >
-                  <option>Java</option>
-                  <option>CSS</option>
-                  <option>Database</option>
-                  <option>JavaScript</option>
-                  <option>Python</option>
+                  {
+                    tags.map(tag => <option key={tag.id}>{ tag.tag}</option>)
+                  }
+                
                 </select>
               </div>
             </div>

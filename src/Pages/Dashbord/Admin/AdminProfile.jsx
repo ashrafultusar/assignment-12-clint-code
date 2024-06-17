@@ -77,6 +77,7 @@ const AdminProfile = () => {
       };
       console.log(postData);
       await mutateAsync(postData);
+      form.reset()
     } catch (err) {
       console.log(err.message);
       toast.error(err.message);
@@ -162,10 +163,6 @@ const AdminProfile = () => {
         <Tooltip></Tooltip>
       </PieChart>
 
-
-      
-
-     
 
       {/* add
  tags */}
