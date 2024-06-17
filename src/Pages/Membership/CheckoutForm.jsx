@@ -5,6 +5,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useAuth from "../../Hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
   const { user } = useAuth();
@@ -102,8 +103,9 @@ const CheckoutForm = () => {
         email: user?.email,
         transactionId: paymentIntent.id,
         date: new Date(),
+        
       };
-
+      toast.success("payment successfull")
       console.log(paymentInfo);
 
       try {

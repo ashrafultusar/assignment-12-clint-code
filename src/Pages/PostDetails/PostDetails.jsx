@@ -16,8 +16,8 @@ const PostDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const { user } = useAuth();
-  
-  const [comments, setComments] = useState([]);
+
+  const [cmt, setComments] = useState([]);
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
       const { data } = await axiosSecure.post("/comment", postData);
@@ -27,10 +27,10 @@ const PostDetails = () => {
     onSuccess: (data) => {
       console.log("Data save successfully");
       toast.success("comment added successfully");
-      setComments(data)
+      setComments(data);
     },
   });
-
+console.log(cmt);
   // comment section
   const handelComment = async (e) => {
     e.preventDefault();
@@ -52,8 +52,20 @@ const PostDetails = () => {
     }
   };
 
-  console.log(comments);
+  console.log(cmt);
+
+  // comment load
+  const { data: commnt = {} } = useQuery({
+    queryKey: ["/comments", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/comments`);
+    
+      return data;
+    },
+  });
+  console.log(commnt)
  
+
   // post data load
   const { data: post = {}, isLoading } = useQuery({
     queryKey: ["/post", id],
@@ -64,6 +76,8 @@ const PostDetails = () => {
     },
   });
 
+  
+
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   const {
@@ -73,7 +87,7 @@ const PostDetails = () => {
     post_time,
     post_title,
     tag,
-    _id
+    _id,
   } = post;
   console.log(_id);
   const date = new Date(post_time);
@@ -174,14 +188,29 @@ const PostDetails = () => {
       </div>
 
       {/* show all comment  */}
-      <div>
-      <div className="avatar">
-          <div className="w-10 rounded-full ">
-            <img src={comments?.postedPhoto} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {commnt.map((comment) => (
+          <div
+            key={comment._id}
+            className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+          >
+            <div className="flex justify-center items-center gap-4 -mt-16 md:justify-end">
+              <h1 className="text-lg font-medium text-blue-600 dark:text-blue-300">
+                {user?.displayName}
+              </h1>
+              <img
+                className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400"
+                src={comment.postedPhoto}
+                alt=""
+              />
+            </div>
+
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-200">
+              {comment.comment}
+            </p>
           </div>
-          <h1 className="bg-gray-500">{comments?.comment}
-</h1>
-        </div>
+        ))}
       </div>
     </div>
   );
