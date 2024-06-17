@@ -16,6 +16,7 @@ const PostDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const { user } = useAuth();
+  
   const [comments, setComments] = useState([]);
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
