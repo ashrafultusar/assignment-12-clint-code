@@ -30,7 +30,7 @@ const PostDetails = () => {
       setComments(data);
     },
   });
-console.log(cmt);
+  // console.log(cmt);
   // comment section
   const handelComment = async (e) => {
     e.preventDefault();
@@ -52,19 +52,18 @@ console.log(cmt);
     }
   };
 
-  console.log(cmt);
-
-  // comment load
-  const { data: commnt = {} } = useQuery({
+  
+  // comment specific load 
+  const { data: commnt = [] } = useQuery({
     queryKey: ["/comments", id],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/comments`);
-    
+      const { data } = await axiosCommon.get(`/comments`, {
+        params: { postId: id },
+      });
       return data;
     },
   });
-  console.log(commnt)
- 
+  console.log(commnt);
 
   // post data load
   const { data: post = {}, isLoading } = useQuery({
@@ -75,8 +74,6 @@ console.log(cmt);
       return data;
     },
   });
-
-  
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
@@ -188,7 +185,6 @@ console.log(cmt);
       </div>
 
       {/* show all comment  */}
-
       <div className="grid grid-cols-1 md:grid-cols-2">
         {commnt.map((comment) => (
           <div
