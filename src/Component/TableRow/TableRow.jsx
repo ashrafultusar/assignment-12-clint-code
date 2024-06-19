@@ -1,6 +1,8 @@
 
 import { useState } from 'react'
 import DeletModal from '../Modal/DeletModal'
+import { Line } from 'recharts'
+import { Link } from 'react-router-dom'
 
 const TableRow = ({ p, refetch,handleDelete }) => {
   // for delete modal
@@ -9,6 +11,17 @@ const TableRow = ({ p, refetch,handleDelete }) => {
     setIsOpen(false)
   }
 
+  const {post_time }=p
+  
+  const date = new Date(post_time);
+  
+  // Extracting hours, minutes, and seconds
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  // const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  
+  // Formatting time as HH:MM:SS
+  const timeString = `${hours}:${minutes}`;
     
   return (
     <tr>
@@ -32,11 +45,9 @@ const TableRow = ({ p, refetch,handleDelete }) => {
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>{10}</p>
       </td>
+     
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-       {"comment"}
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        {p.post_time}
+        {timeString}
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
@@ -60,7 +71,7 @@ const TableRow = ({ p, refetch,handleDelete }) => {
             aria-hidden='true'
             className='absolute inset-0 bg-green-200 opacity-50 rounded-full'
           ></span>
-          <span className='relative'>Comment</span>
+        <span className='relative'>Comment</span>
         </span>
         {/* Update Modal */}
       </td>

@@ -10,27 +10,26 @@ import { FacebookShareButton } from "react-share";
 import useAuth from "../../Hook/useAuth";
 import { toast } from "react-toastify";
 import { axiosSecure } from "../../Hook/useAxiosSecure";
-import { useState } from "react";
 
 const PostDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const { user } = useAuth();
+  // console.log(user);
 
-  const [cmt, setComments] = useState([]);
+  // comment post
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
       const { data } = await axiosSecure.post("/comment", postData);
       return data;
     },
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       console.log("Data save successfully");
       toast.success("comment added successfully");
-      setComments(data);
     },
   });
-  // console.log(cmt);
+
   // comment section
   const handelComment = async (e) => {
     e.preventDefault();
@@ -52,8 +51,7 @@ const PostDetails = () => {
     }
   };
 
-  
-  // comment specific load 
+  // comment specific load
   const { data: commnt = [] } = useQuery({
     queryKey: ["/comments", id],
     queryFn: async () => {
@@ -63,7 +61,7 @@ const PostDetails = () => {
       return data;
     },
   });
-  console.log(commnt);
+  
 
   // post data load
   const { data: post = {}, isLoading } = useQuery({
@@ -74,6 +72,64 @@ const PostDetails = () => {
       return data;
     },
   });
+
+  // upvote function
+  const handelUpvote = async (e) => {
+    e.preventDefault();
+    const name = user?.displayName;
+    const email = user?.email;
+    const postId = post._id;
+    console.log(name, email);
+
+    try {
+      const postData = { name, email,postId };
+      await axiosSecure.post("/upvote", postData);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  // downvote function
+  const handelDownvote = async (e) => {
+    e.preventDefault();
+    const name = user?.displayName;
+    const email = user?.email;
+    const postId = post._id;
+    console.log(name, email);
+
+    try {
+      const postData = { name, email ,postId};
+      await axiosSecure.post("/downvote", postData);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  // get upvote
+  const { data: upvote = [] } = useQuery({
+    queryKey: ["/upvotes", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/upvotes`, {
+        params: { postId: id },
+      });
+      return data;
+    },
+  });
+console.log(upvote);
+  
+  // get down vote
+  const { data: downvote = [] } = useQuery({
+    queryKey: ["/downvotes", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/downvotes`, {
+        params: { postId: id },
+      });
+      return data;
+    },
+  });
+console.log(downvote);
+
+
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
@@ -86,7 +142,7 @@ const PostDetails = () => {
     tag,
     _id,
   } = post;
-  console.log(_id);
+  // console.log(_id);
   const date = new Date(post_time);
 
   // Extracting hours, minutes, and seconds
@@ -136,16 +192,27 @@ const PostDetails = () => {
               </span>
             </div>
           </div>
+
           <div className="divider"></div>
+
+          {/* like and dislike section */}
           <div
             className="flex
            gap-10 mt-2"
           >
-            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-8 py-2.5">
+            <button
+              onClick={handelUpvote}
+              className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border flex items-center gap-1 border-transparent px-8 py-2.5"
+            >
               <AiOutlineLike className="text-white text-xl" />
+              <p>{ upvote?.length}</p>
             </button>
-            <button className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border border-transparent px-8 py-2.5">
+            <button
+              onClick={handelDownvote}
+              className="bg-[#1877F2] rounded-lg hover:bg-[#1877F2]/80 duration-300 transition-colors border flex items-center gap-1 border-transparent px-8 py-2.5"
+            >
               <AiOutlineDislike className="text-white text-xl" />
+              <p>{ downvote?.length}</p>
             </button>
 
             {/* share button */}
@@ -162,10 +229,12 @@ const PostDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* comment  */}
       <div className="max-w-2xl mx-auto mt-2 flex items-center">
         <div className="avatar">
           <div className="w-10 rounded-full ">
-            <img src={author_image} />
+            <img src={user?.photoURL} />
           </div>
         </div>
         <form onSubmit={handelComment} className="flex">
@@ -184,7 +253,7 @@ const PostDetails = () => {
         </form>
       </div>
 
-      {/* show all comment  */}
+      {/* display show all comment  */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {commnt.map((comment) => (
           <div
@@ -197,7 +266,7 @@ const PostDetails = () => {
               </h1>
               <img
                 className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400"
-                src={comment.postedPhoto}
+                src={user?.photoURL}
                 alt=""
               />
             </div>

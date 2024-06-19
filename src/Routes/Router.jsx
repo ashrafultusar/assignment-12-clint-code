@@ -15,6 +15,7 @@ import ManageUser from "../Pages/Dashbord/Admin/ManageUser";
 import PrivateRoute from "./PrivateRoute";
 import Announcement from "../Pages/Dashbord/Admin/Announcement";
 import AdminProfile from "../Pages/Dashbord/Admin/AdminProfile";
+import AllComent from "../Pages/Dashbord/User/AllComent";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,7 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>,
   },
+ 
 
   {
     path: "dashboard",
@@ -92,7 +94,7 @@ export const router = createBrowserRouter([
       {
         path: 'adminProfile',
         element:<AdminProfile></AdminProfile>
-      }
+      }, 
 
     ],
   },

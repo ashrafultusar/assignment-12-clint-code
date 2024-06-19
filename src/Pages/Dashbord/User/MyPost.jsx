@@ -7,7 +7,6 @@ import useAuth from "../../../Hook/useAuth";
 import { toast } from "react-toastify";
 import TableRow from "../../../Component/TableRow/TableRow";
 const MyPost = () => {
-  
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   //   Fetch post Data
@@ -79,12 +78,6 @@ const MyPost = () => {
                       Number Of Vote
                     </th>
 
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Comment
-                    </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
