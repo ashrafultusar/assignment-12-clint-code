@@ -115,7 +115,7 @@ const PostDetails = () => {
       return data;
     },
   });
-console.log(upvote);
+// console.log(upvote);
   
   // get down vote
   const { data: downvote = [] } = useQuery({
@@ -127,7 +127,7 @@ console.log(upvote);
       return data;
     },
   });
-console.log(downvote);
+// console.log(downvote);
 
 
 

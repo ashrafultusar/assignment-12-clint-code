@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const PostsSingleCard = ({ post }) => {
+
+const PostsSingleCard = ({ post,commnt }) => {
+ 
+
+
   const {
     author_image,
     author_name,
@@ -51,7 +55,9 @@ const PostsSingleCard = ({ post }) => {
         <div className="flex items-center justify-between mt-4">
           <div className="flex gap-4">
             <h1>vote</h1>
-            <h1>comment</h1>
+              <h1>Comment:
+                {/* {commnt?.length} */}
+              </h1>
           </div>
 
           <div className="flex items-center">
