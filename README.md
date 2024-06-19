@@ -1,6 +1,6 @@
 Website Name: ConvoHub
 
-Website URL: https://assignment-12-8db85.firebaseapp.com
+Website URL: https://assignment-12-8db85.web.app
 
 
 Admin Username:
