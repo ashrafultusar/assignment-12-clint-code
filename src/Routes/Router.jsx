@@ -58,7 +58,6 @@ export const router = createBrowserRouter([
     element: <Register></Register>,
   },
  
-
   {
     path: "dashboard",
     element: (
@@ -83,6 +82,7 @@ export const router = createBrowserRouter([
         path: "myProfile",
         element: <MyProfile></MyProfile>,
       },
+     
       {
         path: "manageUser",
         element: <ManageUser></ManageUser>,
@@ -98,4 +98,8 @@ export const router = createBrowserRouter([
 
     ],
   },
+  {
+    path: '/comment',
+    element:<AllComent></AllComent>
+  }
 ]);

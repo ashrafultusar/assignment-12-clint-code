@@ -24,7 +24,7 @@ const MyPost = () => {
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
-      const { data } = await axiosSecure.delete(`/post/${id}`);
+      const { data, } = await axiosSecure.delete(`/post/${id}`);
       return data;
     },
     onSuccess: (data) => {
@@ -43,7 +43,7 @@ const MyPost = () => {
       console.log(err);
     }
   };
-  //   if (isLoading) return <LoadingSpinner></LoadingSpinner>
+    // if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <>
@@ -100,7 +100,6 @@ const MyPost = () => {
                 </thead>
                 <tbody>
                   {/* Room row data */}
-
                   {post.map((p) => (
                     <TableRow
                       key={p._id}
