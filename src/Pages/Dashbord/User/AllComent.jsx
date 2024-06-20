@@ -2,20 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { axiosCommon } from '../../../Hook/useAxiosCommon';
 import { useParams } from 'react-router-dom';
+import AllCommentSingleTable from './AllCommentSingleTable';
 
 const AllComent = () => {
-    // const { _id } = useParams();
-    // const { data: commnt = [] } = useQuery({
-    //     queryKey: ["/comments", _id],
-    //     queryFn: async () => {
-    //       const { data } = await axiosCommon.get(`/comments`, {
-    //         params: { postId: id },
-    //       });
-    //       return data;
-    //     },
-    //   });
+    
+  
 
-    // console.log(commnt);
+
     const { postId } = useParams();
 
     const { data: comments = [], isLoading, error } = useQuery({
@@ -32,7 +25,9 @@ console.log(comments);
 
     return (
         <div>
-            <h1>all comment</h1>
+        {
+          comments.map(comnt=><AllCommentSingleTable comnt={comnt} key={comnt.id}></AllCommentSingleTable>)
+            }
         </div>
     );
 };

@@ -17,21 +17,18 @@
 
 //   // console.log(commnt);
 //   const [itemPerPage, setItemPerPage] = useState(5);
-//   const [currentPage, setCurrentPage] = useState(1); 
+//   const [currentPage, setCurrentPage] = useState(1);
 
 //   const [search, setSearch] = useState("");
 //   const { posts } = useServices(search);
 
 //   console.log(posts);
- 
-
 
 //   const handleSearch = (e) => {
 //     e.preventDefault();
 //     const searchText = e.target.search.value;
 //     setSearch(searchText);
 //   };
-
 
 //   // paigenation
 //   const totalPages = Math.ceil(posts.length / itemPerPage);
@@ -43,7 +40,6 @@
 
 //   // Create an array for pagination buttons
 //   const pages = [...Array(totalPages).keys()].map((number) => number + 1);
-
 
 //   return (
 //     <div>
@@ -157,7 +153,7 @@ import useServices from "../../../Hook/useServices";
 
 const Banner = () => {
   const [itemPerPage, setItemPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const { posts } = useServices(search);
 

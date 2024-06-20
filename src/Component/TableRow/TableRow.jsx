@@ -9,7 +9,8 @@ const TableRow = ({ p, refetch, handleDelete }) => {
     setIsOpen(false);
   };
 
-  const { post_time } = p;
+  const { post_time,_id } = p;
+  // console.log(p);
 
   const date = new Date(post_time);
 
@@ -72,10 +73,10 @@ const TableRow = ({ p, refetch, handleDelete }) => {
             aria-hidden="true"
             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
           ></span>
-          <Link to={"/comment"}>
+          <Link to={`/comment/${_id}`}>
             <button className="relative">Comment</button>
           </Link>
-        </span>
+        </span> 
         {/* Update Modal */}
       </td>
     </tr>

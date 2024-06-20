@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/comment',
+    path: '/comment/:postId',
     element:<AllComent></AllComent>
   }
 ]);

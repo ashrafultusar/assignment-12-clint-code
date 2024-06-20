@@ -29,7 +29,7 @@ const PostsSingleCard = ({ post,commnt }) => {
 
   return (
     <div>
-      <Link to={`/postDetails/${_id}`}>
+      <Link to={`/postDetails/${_id}`}> 
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-gray-600 dark:text-gray-400">
