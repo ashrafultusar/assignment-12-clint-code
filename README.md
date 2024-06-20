@@ -3,9 +3,9 @@ Website Name: ConvoHub
 Website URL: https://assignment-12-8db85.web.app
 
 
-Admin Username:
+Admin Username: test1@gmail.com
 
-Admin Password:
+Admin Password: 123456
 
 Website Feature:
 

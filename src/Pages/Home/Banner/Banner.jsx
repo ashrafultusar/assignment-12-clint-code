@@ -189,6 +189,9 @@ const Banner = () => {
     setCurrentPage(page);
   };
 
+
+  
+
   return (
     <div>
       <div

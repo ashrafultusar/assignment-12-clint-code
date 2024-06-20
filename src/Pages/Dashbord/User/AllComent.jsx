@@ -26,7 +26,7 @@ console.log(comments);
 
     return (
       <div >
-        <Sidebar></Sidebar>
+        {/* <Sidebar></Sidebar> */}
         {/* {
           comments.map(comnt=><AllCommentSingleTable comnt={comnt} key={comnt._id}></AllCommentSingleTable>)
             } */}
