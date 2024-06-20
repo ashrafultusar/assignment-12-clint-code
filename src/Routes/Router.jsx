@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import Announcement from "../Pages/Dashbord/Admin/Announcement";
 import AdminProfile from "../Pages/Dashbord/Admin/AdminProfile";
 import AllComent from "../Pages/Dashbord/User/AllComent";
+import Activities from "../Pages/Dashbord/Admin/Activities";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,10 @@ export const router = createBrowserRouter([
         path: 'adminProfile',
         element:<AdminProfile></AdminProfile>
       }, 
+      {
+        path: 'activities',
+        element:<Activities></Activities>
+      }
 
     ],
   },

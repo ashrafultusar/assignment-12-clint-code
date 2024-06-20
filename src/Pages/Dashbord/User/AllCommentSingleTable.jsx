@@ -183,10 +183,11 @@ import { toast } from "react-toastify";
 import Modal from 'react-modal';
 
 const AllCommentSingleTable = ({ comnt }) => {
-  const { comment, postedPhoto, postEmail } = comnt;
+  const { comment, postedPhoto, postEmail,_id } = comnt;
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+
 
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
@@ -203,8 +204,13 @@ const AllCommentSingleTable = ({ comnt }) => {
     e.preventDefault();
     const form = e.target;
     const select = form.report.value;
+    const photo = postedPhoto;
+    const postComment = comment;
+    const email = postEmail;
+    const commentId=_id
+    
     try {
-      const postData = { select };
+      const postData = { select,photo,postComment,email,commentId };
       console.log(postData);
       await mutateAsync(postData);
       setIsButtonDisabled(true);  // Disable button after submit
@@ -286,7 +292,7 @@ const AllCommentSingleTable = ({ comnt }) => {
           </form>
         </td>
       </tr>
-      
+
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}

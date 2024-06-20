@@ -217,8 +217,7 @@ const Navber = () => {
     }
 }
 
-  // announcement notification code
-  
+  // announcement notification get
   const axiosCommon = useAxiosCommon();
 
   const { data: posts = [] } = useQuery({

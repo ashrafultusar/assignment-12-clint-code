@@ -85,22 +85,22 @@ const Sidebar = () => {
                 role === 'Admin' && <>
                 <ul>
                     <NavLink className="text-xl font-bold" to="adminProfile">
-                    AdminProfile
+                    Admin Profile
                     </NavLink>
                   </ul>
                   <ul>
                     <NavLink className="text-xl font-bold" to="manageUser">
-                    ManageUsers
+                    Manage Users
                     </NavLink>
                   </ul>
                   <ul>
-                    <NavLink className="text-xl font-bold" >
+                    <NavLink to='activities' className="text-xl font-bold" >
                     Activities
                     </NavLink>
                   </ul>
                   <ul>
-                    <NavLink className="text-xl font-bold" to="announcement">
-                    MakeAnnouncement
+                    <NavLink className="text-xl font-bold " to="announcement">
+                    Make Announcement
 
                     </NavLink>
                   </ul>
