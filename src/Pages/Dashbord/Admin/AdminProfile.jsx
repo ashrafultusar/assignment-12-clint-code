@@ -165,7 +165,8 @@ const AdminProfile = () => {
       {/* add
  tags */}
 
-      <div>
+      <div className="mb-24">
+        <h1 className="text-xl font-bold  mb-4">Added your Post tag</h1>
         <form onSubmit={handelTags} className="flex">
           <input
             type="text"

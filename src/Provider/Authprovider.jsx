@@ -13,14 +13,17 @@ import { app } from "../Firebase/firebase.config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import useAxiosSecure, { axiosSecure } from "../Hook/useAxiosSecure";
+import useAxiosCommon from "../Hook/useAxiosCommon";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
 
 const Authprovider = ({ children }) => {
+  const axiosCommon = useAxiosCommon();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   // const axiosSecure = useAxiosSecure();
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -51,14 +54,14 @@ const Authprovider = ({ children }) => {
   };
 
   // get token from server
-  const getToken = async email => {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_API_URL}/jwt`,
-      { email },
-      { withCredentials: true }
-    )
-    return data
-  }
+  // const getToken = async email => {
+  //   const { data } = await axios.post(
+  //     `${import.meta.env.VITE_API_URL}/jwt`,
+  //     { email },
+  //     { withCredentials: true }
+  //   )
+  //   return data
+  // }
 
   // save user
   const saveUser = async (user) => {
@@ -99,21 +102,29 @@ const Authprovider = ({ children }) => {
   //     return unSubscribe();
   //   };
   // }, []);
-  
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser)
-      if (currentUser) {
-        getToken(currentUser.email)
-        saveUser(currentUser)
-      }
-      setLoading(false)
-    }) 
-    return () => {
-      return unsubscribe()
-    }
-  }, [])
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        // getToken(currentUser.email)
+        const userInfo = { email: currentUser.email };
+        axiosCommon.post("/jwt", userInfo)
+        .then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
+        saveUser(currentUser);
+      } else {
+        localStorage.removeItem("access-token");
+      }
+      setLoading(false);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, [axiosCommon]);
 
   const authInfo = {
     user,
@@ -122,7 +133,8 @@ const Authprovider = ({ children }) => {
     signIn,
     signInGoogle,
     logOut,
-    updateUserProfile,saveUser
+    updateUserProfile,
+    saveUser,
   };
 
   return (
