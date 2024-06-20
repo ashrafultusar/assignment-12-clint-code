@@ -26,7 +26,7 @@ console.log(comments);
     return (
         <div>
         {
-          comments.map(comnt=><AllCommentSingleTable comnt={comnt} key={comnt.id}></AllCommentSingleTable>)
+          comments.map(comnt=><AllCommentSingleTable comnt={comnt} key={comnt._id}></AllCommentSingleTable>)
             }
         </div>
     );

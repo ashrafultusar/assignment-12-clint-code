@@ -77,7 +77,7 @@ const AdminProfile = () => {
       };
       console.log(postData);
       await mutateAsync(postData);
-      form.reset()
+      form.reset();
     } catch (err) {
       console.log(err.message);
       toast.error(err.message);
@@ -125,8 +125,7 @@ const AdminProfile = () => {
         </div>
       </div>
       {/* data count stastic */}
-      
- 
+
       <div className="stats stats-vertical lg:stats-horizontal shadow">
         <div className="stat">
           <div className="stat-title">Total Posts</div>
@@ -143,8 +142,8 @@ const AdminProfile = () => {
           <div className="stat-value">{stats?.users}</div>
         </div>
       </div>
-        
-         {/* chart */}
+
+      {/* chart */}
       <PieChart width={400} height={400}>
         <Pie
           data={PieChartData}
@@ -162,7 +161,6 @@ const AdminProfile = () => {
         </Pie>
         <Tooltip></Tooltip>
       </PieChart>
-
 
       {/* add
  tags */}
