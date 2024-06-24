@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>,
   },
- 
+
   {
     path: "dashboard",
     element: (
@@ -83,28 +83,31 @@ export const router = createBrowserRouter([
         path: "myProfile",
         element: <MyProfile></MyProfile>,
       },
-     
+      {
+        path: "comment/:postId",
+        element: <AllComent></AllComent>,
+      },
+
       {
         path: "manageUser",
         element: <ManageUser></ManageUser>,
       },
       {
-        path: 'announcement',
-        element:<Announcement></Announcement>
+        path: "announcement",
+        element: <Announcement></Announcement>,
       },
       {
-        path: 'adminProfile',
-        element:<AdminProfile></AdminProfile>
-      }, 
+        path: "adminProfile",
+        element: <AdminProfile></AdminProfile>,
+      },
       {
-        path: 'activities',
-        element:<Activities></Activities>
-      }
-
+        path: "activities",
+        element: <Activities></Activities>,
+      },
     ],
   },
-  {
-    path: '/comment/:postId',
-    element:<AllComent></AllComent>
-  }
+  // {
+  //   path: "/comment/:postId",
+  //   element: <AllComent></AllComent>,
+  // },
 ]);
