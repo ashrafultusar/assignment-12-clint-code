@@ -32,15 +32,52 @@ ConvoHub is a forum website where people can hold conversations through posted m
 - **Activities:** Admins can view reports on all posts and take appropriate actions.
 - **Make Announcements:** Admins can make special announcements or event notices, which are displayed on the homepage. The announcement icon shows the number of announcements.
 
-## Getting Started
+
+## Technologies Used
+- HTML
+- Tailwind CSS
+- JavaScript
+- React
+- Node.js
+- Firebase
+- MongoDB
+- Express.js
+- JWT
+- CSS3
+
+
+
+
+## Run Your Local Computer 
+
+Follow these steps to clone and run the project on your local machine.
 
 ### Prerequisites
-- Node.js
-- MongoDB
-- Firebase
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (which includes npm)
+- [MongoDB](https://www.mongodb.com/)
+- [Firebase CLI](https://firebase.google.com/docs/cli) (if needed for your project)
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/convobub.git
-   cd convobub
+
+1. **Clone the repository**
+
+   ```sh
+   git clone https://github.com/yourusername/your-repo-name.git
+2. **Navigate to the project directory**
+
+```sh
+cd your-repo-name
+3. **Install dependencies**
+
+npm install
+
+4. **Replace mongodb url**
+
+Replace placeholders like `yourusername` and `your-repo-name` with the actual values for your GitHub repository. Additionally, fill in the sections like "Description," "Deployment," "Usage," "Contributing," "License," and "Acknowledgments" with the relevant information for your project.
+
+4. **Set up environment variables**
+5. **Start the backend server**
+6. **Start the frontend development server**
