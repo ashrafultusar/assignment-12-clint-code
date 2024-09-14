@@ -7,7 +7,7 @@ const LoadingSpinner = ({ smallHeight }) => {
       className={` ${smallHeight ? 'h-[250px]' : 'h-[70vh]'}
       flex 
       flex-col 
-      justify-center 
+      justify-center  
       items-center `}
     >
       <ScaleLoader size={100} color='red' />

@@ -53,16 +53,6 @@ const Authprovider = ({ children }) => {
     });
   };
 
-  // get token from server
-  // const getToken = async email => {
-  //   const { data } = await axios.post(
-  //     `${import.meta.env.VITE_API_URL}/jwt`,
-  //     { email },
-  //     { withCredentials: true }
-  //   )
-  //   return data
-  // }
-
   // save user
   const saveUser = async (user) => {
     const currentUser = {
@@ -80,37 +70,13 @@ const Authprovider = ({ children }) => {
     return data;
   };
 
-  // useEffect(() => {
-  //   const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-
-  //     if (currentUser) {
-  //       const userInfo = { email: currentUser.email };
-  //       axiosSecure.post("/jwt", userInfo).then((res) => {
-  //         if (res.data.token) {
-  //           localStorage.setItem("access-token", res.data.token);
-  //         }
-  //       });
-  //     } else {
-  //       // TODO
-  //       localStorage.removeItem("access-token");
-  //     }
-
-  //     setLoading(false);
-  //   });
-  //   return () => {
-  //     return unSubscribe();
-  //   };
-  // }, []);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         // getToken(currentUser.email)
         const userInfo = { email: currentUser.email };
-        axiosCommon.post("/jwt", userInfo)
-        .then((res) => {
+        axiosCommon.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
           }

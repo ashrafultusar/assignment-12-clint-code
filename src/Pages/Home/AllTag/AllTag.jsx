@@ -12,7 +12,7 @@ const AllTag = () => {
   console.log(tags);
 
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto">
       <h1 className="text-xl md:text-2xl font-bold text-center my-6">
         Recommended Tag
       </h1>

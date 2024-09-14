@@ -376,7 +376,7 @@ const PostDetails = () => {
   const handleUpvote = async (e) => {
     e.preventDefault();
     const name = user?.displayName;
-    const email = user?.email;
+    const email = user?.email; 
     const postId = post._id;
 
     try {
@@ -446,7 +446,7 @@ const PostDetails = () => {
   const shareUrl = "https://www.pakkamarwadi.tk/";
 
   return (
-    <div className="my-14">
+    <div className="pt-24 mb-24">
       <div className="max-w-2xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <img className="object-cover w-full" src={author_image} alt="" />
 

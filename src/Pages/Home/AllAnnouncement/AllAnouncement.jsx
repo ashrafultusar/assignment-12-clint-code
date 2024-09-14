@@ -19,7 +19,7 @@ const AllAnouncement = () => {
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
-    <div className="my-10">
+    <div className="my-10 max-w-screen-xl mx-auto">
       {/* {posts.map((p) => (
                 <div key={p._id} className="w-full  px-8 py-4 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800">
                 <div className="flex justify-center -mt-16 md:justify-end">
